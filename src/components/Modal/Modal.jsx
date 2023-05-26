@@ -1,27 +1,29 @@
-import { Component, useEffect } from 'react'
+import { useEffect } from 'react'
 import React from 'react'
 
 const Modal = ({ children, close }) => {
+
+	
+
 	useEffect(() => {
 		const handlePressESC = (e) => {
 			console.log('press')
 			if (e.code === 'Escape') close()
+			
 		}
+		
+		console.log('useEffect(Mount) in Modal')
 		document.addEventListener('keydown', handlePressESC)
-		return () => {
-			document.removeEventListener('keydown', handlePressESC)
-		}
+
+		return () => document.removeEventListener('keydown', handlePressESC)
+		
 	}, [close])
 
-	// useEffect(() => () => console.log('Unmount'), [])
+	// useEffect(() => () => document.removeEventListener('keydown', handlePressESC),[])
 
-	// 	componentDidMount() {
-	// 	document.addEventListener('keydown', this.handlePressESC)
-	// }
+	
 
-	// componentWillUnmount() {
-	// 	document.removeEventListener('keydown', this.handlePressESC)
-	// }
+	
 
 	return (
 		<div
